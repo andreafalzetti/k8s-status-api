@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-status-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-status-api
+  template:
+    metadata:
+      labels:
+        app: k8s-status-api
+    spec:
+      containers:
+      - image: afalzetti/k8s-status-api:1.0.0
+        name: k8s-status-api
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-status-api
+spec:
+  type: ClusterIP
+  ports:
+  - name: "k8s-status-api"
+    port: 8080
+  selector:
+    app: k8s-status-api
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-status-api
+  annotations:
+    dev.okteto.com/generate-host: k8s-status-api
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: k8s-status-api
+            port:
+              number: 8080
+        path: /
+        pathType: ImplementationSpecific
