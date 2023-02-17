@@ -1,18 +1,16 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
+	"github.com/andrealfalzetti/k8s-status-api/pkg/pods"
+	"github.com/andrealfalzetti/k8s-status-api/pkg/root"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	fmt.Println("Starting hello-world server...")
-	http.HandleFunc("/", helloServer)
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		panic(err)
-	}
-}
+	r := gin.Default()
 
-func helloServer(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello world!")
+	root.RegisterRoutes(r)
+	pods.RegisterRoutes(r)
+
+	r.Run()
 }

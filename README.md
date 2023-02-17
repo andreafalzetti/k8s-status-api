@@ -35,3 +35,5 @@ make docker-publish TAG=1.0.0
 
 - [ ] Create Swagger/OpenAPI specs and use them for request/response validation and potentially for code generation
 - [ ] Setup GitHub Actions
+- [ ] Consider introducing API versioning (e.g /v1)
+- [ ] Add semantic versioning of the service
