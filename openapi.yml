@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  title: Kubernetes Status API
+  version: 1.0.0
+  contact:
+    email: andrea@falzetti.me
+paths:
+  /:
+    get:
+      description: 'Returns a friendly message'
+      operationId: GetRoot
+      summary: 'Returns a friendly message'
+      responses:
+        '200':
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hello'
+  /pods:
+    summary: Pods Endpoint
+    description: All actions around Kubernetes Pods and their status
+    get:
+      tags: 
+        - pods
+      operationId: ListPods
+      summary: Returns a list of sortable Kubernetes Pods
+      parameters:
+        - name: sort
+          in: query
+          required: false
+          example: 'age'
+          allowEmptyValue: true
+          schema:
+            type: string
+            default: ''
+            enum:
+              - age
+              - name
+              - restarts
+      responses:
+        '200':
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPods'
+    x-last-modified: 1676674523731
+components:
+  schemas: 
+    Hello:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Hello!
+    ListPods:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pod'
+    Pod:
+      type: object
+      properties:
+        name:
+          type: string
+          example: pod-name-1
+        type:
+          type: string
+          example: 'pod'
+servers:
+  - url: https://hello-world-andreafalzetti.assessment.jdm.okteto.net/
+    description: 'Okteto Cloud Development Endpoint'
+    variables: {}
