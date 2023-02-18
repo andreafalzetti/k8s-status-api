@@ -10,7 +10,9 @@ type handler struct {
 }
 
 type Pod struct {
-	Name string `json:"name"`
+	Name     string `json:"name"`
+	Age      string `json:"age"`
+	Restarts int    `json:"restarts"`
 }
 
 type Meta struct {

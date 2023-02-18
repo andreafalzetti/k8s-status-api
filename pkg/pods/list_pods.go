@@ -23,11 +23,19 @@ func (h handler) ListPods(c *gin.Context) {
 
 	var items []Pod
 	for _, pod := range pods.Items {
-		items = append(items, Pod{Name: pod.Name})
+		age := time.Since(pod.CreationTimestamp.Time).Truncate(time.Second)
+		restarts := 0
+		for _, containerStatus := range pod.Status.ContainerStatuses {
+			restarts += int(containerStatus.RestartCount)
+		}
+		items = append(items, Pod{
+			Name:     pod.Name,
+			Age:      age.String(),
+			Restarts: restarts,
+		})
 	}
 
 	// fmt.Println("Pods: ", items)
-	// return the pods as JSON using the gin interface
 	// c.JSON(http.StatusOK, gin.H{
 	// 	"items": pods,
 	// })
