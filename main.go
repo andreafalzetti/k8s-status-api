@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/andrealfalzetti/k8s-status-api/pkg/pods"
 	"github.com/andrealfalzetti/k8s-status-api/pkg/root"
 	"github.com/andrealfalzetti/k8s-status-api/pkg/util"
@@ -20,13 +18,12 @@ func main() {
 		logger.Fatalf("Failed to create Kubernetes client %d", err)
 	}
 
-	fmt.Println(kubernetes_client)
-
 	r := gin.Default()
 
 	h := &util.SharedHandlerContext{
 		Logger:            logger,
 		Kubernetes_client: kubernetes_client,
+		Default_Namespace: "andreafalzetti",
 	}
 
 	root.RegisterRoutes(r, h)

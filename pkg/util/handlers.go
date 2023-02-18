@@ -8,4 +8,5 @@ import (
 type SharedHandlerContext struct {
 	Logger            *logrus.Logger
 	Kubernetes_client *kubernetes.Clientset
+	Default_Namespace string
 }

@@ -9,6 +9,19 @@ type handler struct {
 	*util.SharedHandlerContext
 }
 
+type Pod struct {
+	Name string `json:"name"`
+}
+
+type Meta struct {
+	Count int `json:"count"`
+}
+
+type ListPodsResponse struct {
+	Meta Meta  `json:"meta"`
+	Data []Pod `json:"data"`
+}
+
 func RegisterRoutes(r *gin.Engine, shc *util.SharedHandlerContext) {
 	h := &handler{shc}
 	routes := r.Group("/pods")
