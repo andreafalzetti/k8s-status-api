@@ -10,7 +10,7 @@ import (
 )
 
 // TODO: extend this function to support creating the client outside the cluster
-func GetKubernetesClient() (*kubernetes.Clientset, error) {
+func GetKubernetesClient() (kubernetes.Interface, error) {
 	config, err := rest.InClusterConfig()
 	if err != nil {
 		return nil, err
@@ -24,7 +24,7 @@ func GetKubernetesClient() (*kubernetes.Clientset, error) {
 	return client, nil
 }
 
-func GetPods(ctx context.Context, client *kubernetes.Clientset, ns string) (*v1.PodList, error) {
+func GetPods(ctx context.Context, client kubernetes.Interface, ns string) (*v1.PodList, error) {
 	pods, err := client.CoreV1().Pods(ns).List(ctx, metav1.ListOptions{})
 	if err != nil {
 		return nil, err

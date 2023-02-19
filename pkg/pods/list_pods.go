@@ -9,16 +9,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (h handler) ListPods(c *gin.Context) {
-	ctx, cancel := context.WithTimeout(c.Request.Context(), 5*time.Second)
-	defer cancel()
-
-	h.Logger.Debug("Fetching pods from Kubernetes")
+func GetSortedPods(ctx context.Context, h handler, sortParam string) ([]Pod, error) {
 	pods, err := util.GetPods(ctx, h.Kubernetes_client, h.Default_Namespace)
 	if err != nil {
-		h.Logger.WithError(err).Error("Error getting pods")
-		c.JSON(http.StatusInternalServerError, gin.H{})
-		return
+		return nil, err
 	}
 
 	var items []Pod
@@ -35,10 +29,32 @@ func (h handler) ListPods(c *gin.Context) {
 		})
 	}
 
-	// fmt.Println("Pods: ", items)
-	// c.JSON(http.StatusOK, gin.H{
-	// 	"items": pods,
-	// })
+	if sortParam == "" {
+		return items, nil
+	}
+
+	sortedItems, err := SortPodsByParam(items, sortParam)
+	if err != nil {
+		return nil, err
+	}
+
+	return sortedItems, nil
+}
+
+func (h handler) ListPods(c *gin.Context) {
+	ctx, cancel := context.WithTimeout(c.Request.Context(), 5*time.Second)
+	defer cancel()
+
+	h.Logger.Debug("Fetching pods from Kubernetes")
+
+	sortParam := c.Query("sort")
+
+	items, err := GetSortedPods(ctx, h, sortParam)
+	if err != nil {
+		h.Logger.WithError(err).Error("Error retrieving pods")
+		c.JSON(http.StatusInternalServerError, gin.H{})
+		return
+	}
 
 	c.JSON(http.StatusOK, ListPodsResponse{
 		Meta: Meta{
