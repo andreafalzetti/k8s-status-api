@@ -1,10 +1,13 @@
 DOCKER_REGISTRY ?= registry.cloud.okteto.net
 DOCKER_IMAGE ?= k8s-status-api
-# DOCKER_IMAGE ?= afalzetti/k8s-status-api
 
 .PHONY: start
 start:
 	go run main.go
+
+.PHONY: test
+test:
+	go test ./...
 
 .PHONY: docker-build
 docker-build:

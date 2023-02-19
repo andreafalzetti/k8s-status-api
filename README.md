@@ -1,6 +1,6 @@
 # Kubernetes Status API
 
-| This project is intended as an exercise.
+> This project is intended as an exercise.
 
 ## Description
 
@@ -25,6 +25,11 @@ To launch the project in Okteto, follow these steps:
 1. `okteto deploy --build`
 1. `okteto up`
 
+
+## Testing
+
+Run `make test` to execute the unit tests
+
 ### Publish to Docker
 
 ```bash
@@ -33,7 +38,23 @@ make docker-publish TAG=1.0.0
 
 ### Future improvements
 
-- [ ] Create Swagger/OpenAPI specs and use them for request/response validation and potentially for code generation
+- [ ] Use the [./openapi.yml specs](./openapi.yml) for request/response validation and potentially for code generation
 - [ ] Setup GitHub Actions
 - [ ] Consider introducing API versioning (e.g /v1)
 - [ ] Add semantic versioning of the service
+- [ ] Consider how to protect the API (ie. auth)
+
+## Considerations
+
+This project was quite fun to build and it was the first time for me integrating with the Kubernetes API so I had to learn how to do it.
+
+In terms of testing, I've added some essential unit tests to:
+    - validate the sorting logic
+    - validate the integration with the kubernetes's API using the provided mock client
+
+## Useful links
+
+I've encountered a couple of useful blog posts that I've used to accomplish this exercise:
+
+- https://betterprogramming.pub/build-a-scalable-api-in-go-with-gin-131af7f780c0
+- https://medium.com/the-phi/mocking-the-kubernetes-client-in-go-for-unit-testing-ddae65c4302
