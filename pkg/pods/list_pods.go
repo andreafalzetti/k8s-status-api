@@ -49,6 +49,7 @@ func (h handler) ListPods(c *gin.Context) {
 
 	sortParam := c.Query("sort")
 
+	// TODO: handle both 4xx and 5xx errors
 	items, err := GetSortedPods(ctx, h, sortParam)
 	if err != nil {
 		h.Logger.WithError(err).Error("Error retrieving pods")
