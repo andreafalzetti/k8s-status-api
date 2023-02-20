@@ -79,6 +79,6 @@ components:
           type: string
           example: 'pod'
 servers:
-  - url: https://hello-world-andreafalzetti.assessment.jdm.okteto.net/
+  - url: https://k8s-status-api-andreafalzetti.assessment.jdm.okteto.net
     description: 'Okteto Cloud Development Endpoint'
     variables: {}

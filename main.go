@@ -19,6 +19,7 @@ func main() {
 	}
 
 	r := gin.Default()
+	r.Use(util.CORSMiddleware())
 
 	h := &util.SharedHandlerContext{
 		Logger:            logger,
