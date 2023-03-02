@@ -20,6 +20,15 @@ This repo contains an HTTP API service that expose the status of a Kubernetes cl
 
 ## Development
 
+### Using a CDE (Gitpod.io)
+
+Launching the project in Gitpod will automatically connect to your Okteto cluster. Add the following env vars in your [Gitpod vars](https://gitpod.io/user/variables):
+
+- `OKTETO_KUBECONFIG`: get this from the Okteto UI or CLI, and encode it in base64
+- `OKTETO_TOKEN`: get this from the Okteto UI
+
+Make sure to set a strict scope to avoid leaking the variables.
+
 ### Requirements
 
 As requirement to run this, you need a Kubernetes cluster. In my case I am using Okteto Cloud. Check out [their Go sample project](https://www.okteto.com/docs/samples/golang/) to know more about Okteto.
@@ -30,7 +39,6 @@ To launch the project in Okteto, follow these steps:
 1. `okteto context use https://<YOUR_NAMESPACE>.okteto.net`
 1. `okteto deploy --build`
 1. `okteto up`
-
 
 ### Testing
 
