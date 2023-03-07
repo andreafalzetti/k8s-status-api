@@ -1,6 +1,6 @@
 build:
   k8s-status-api:
-    image: afalzetti/k8s-status-api:1.0.0
+    image: okteto.dev/k8s-status-api:1.0.0
     context: .
 
 deploy:
