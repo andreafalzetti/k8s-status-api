@@ -7,10 +7,11 @@ import (
 
 	"github.com/andrealfalzetti/k8s-status-api/pkg/util"
 	"github.com/gin-gonic/gin"
+	"k8s.io/client-go/kubernetes"
 )
 
-func GetSortedPods(ctx context.Context, h handler, sortParam string) ([]Pod, error) {
-	pods, err := util.GetPods(ctx, h.Kubernetes_client, h.Default_Namespace)
+func GetSortedPods(ctx context.Context, k kubernetes.Interface, ns string, sortParam string) ([]Pod, error) {
+	pods, err := util.GetPods(ctx, k, ns)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +51,7 @@ func (h handler) ListPods(c *gin.Context) {
 	sortParam := c.Query("sort")
 
 	// TODO: handle both 4xx and 5xx errors
-	items, err := GetSortedPods(ctx, h, sortParam)
+	items, err := GetSortedPods(ctx, h.Kubernetes_client, h.Default_Namespace, sortParam)
 	if err != nil {
 		h.Logger.WithError(err).Error("Error retrieving pods")
 		c.JSON(http.StatusInternalServerError, gin.H{})

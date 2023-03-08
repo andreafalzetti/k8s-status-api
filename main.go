@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/andrealfalzetti/k8s-status-api/pkg/graphqlApi"
 	"github.com/andrealfalzetti/k8s-status-api/pkg/pods"
 	"github.com/andrealfalzetti/k8s-status-api/pkg/root"
 	"github.com/andrealfalzetti/k8s-status-api/pkg/util"
@@ -28,6 +29,7 @@ func main() {
 	}
 
 	root.RegisterRoutes(r, h)
+	graphqlApi.RegisterRoutes(r, h)
 	pods.RegisterRoutes(r, h)
 
 	r.Run()

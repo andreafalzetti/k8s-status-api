@@ -60,7 +60,7 @@ func TestGetSortedPods(t *testing.T) {
 	}
 
 	// Check that it returns the right amount of pods
-	pods, err := GetSortedPods(ctx, h, "")
+	pods, err := GetSortedPods(ctx, h.Kubernetes_client, h.Default_Namespace, "")
 	assert.Nil(t, err)
 	assert.Len(t, pods, 2)
 }
