@@ -1,12 +1,10 @@
-permissions: write-all
-
 on:
   pull_request:
-    branches:
-      - main
+    types:
+      - closed
 
 jobs:
-  preview:
+  closed:
     runs-on: ubuntu-latest
     steps:
     - name: Context
@@ -15,10 +13,7 @@ jobs:
         url: ${{secrets.OKTETO_URL}}
         token: ${{ secrets.OKTETO_TOKEN }}
 
-    - name: Deploy preview environment
-      uses: okteto/deploy-preview@latest
-      env:
-       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Destroy preview environment
+      uses: okteto/destroy-preview@latest
       with:
         name: pr-${{ github.event.number }}
-        timeout: 15m
