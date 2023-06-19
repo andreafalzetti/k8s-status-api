@@ -1,6 +1,7 @@
 permissions: write-all
 
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - main
