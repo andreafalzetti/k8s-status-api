@@ -5,6 +5,11 @@ build:
 
 deploy:
   - kubectl apply -f k8s.yml
+  - okteto deploy -n pr7382-secondary -f okteto2.yml                                                                                    system
+
+destroy:
+  - okteto destroy -n pr7382-secondary -f okteto2.yml                                                                                    system
+
 
 dev:
   k8s-status-api:
