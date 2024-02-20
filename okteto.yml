@@ -1,11 +1,16 @@
-build:
-  k8s-status-api:
+variables:
+  VAR1: andrea
+  MY_VAR: ${MY_VAR1}
+
+#build:
+#  k8s-status-api:
 #    image: okteto.dev/k8s-status-api:1.0.0
-    context: .
+#    context: .
 
 deploy:
   - kubectl apply -f k8s.yml
   - echo $VAR1
+  - echo $MY_VAR
 
 
 dev:
