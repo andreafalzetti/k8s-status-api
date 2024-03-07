@@ -12,6 +12,10 @@ deploy:
     - kubectl apply -f k8s.yml
     - echo $VAR1
 
+destroy:
+  remote: true
+  commands:
+    - echo "destroy!!"
 
 dev:
   k8s-status-api:
