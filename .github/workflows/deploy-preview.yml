@@ -26,3 +26,4 @@ jobs:
         timeout: 15m
         branch: non-existing-branch
 
+
