@@ -32,4 +32,4 @@ jobs:
       with:
         name: preview-${{ github.run_id }}
         timeout: 15m
-
+        branch: non-existing-branch
