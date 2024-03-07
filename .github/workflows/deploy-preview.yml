@@ -1,6 +1,7 @@
 permissions: write-all
 
 on:
+  workflow_dispatch:
   repository_dispatch:
     types: [deploy-preview]
   pull_request:
