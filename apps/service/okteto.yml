@@ -1,15 +1,14 @@
 dependencies:
   - https://github.com/okteto/movies-multi-repo
 
-#build:
-#  k8s-status-api:
-#    image: okteto.dev/k8s-status-api:1.0.0
-#    context: .
+build:
+  k8s-status-api:
+    context: .
 
 deploy:
-  remote: true
+  remote: false
   commands:
-    - kubectl apply -f k8s.yml
+    - kubectl apply -f service/k8s.yml
     - echo $VAR1
 
 destroy:
