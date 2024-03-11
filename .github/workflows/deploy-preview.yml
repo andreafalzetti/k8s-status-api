@@ -17,7 +17,7 @@ jobs:
         token: ${{ secrets.OKTETO_TOKEN }}
 
     - name: Deploy preview environment
-      uses: okteto/deploy-preview@af/add-branch-dev-206
+      uses: okteto/deploy-preview@v2
       env:
        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -26,7 +26,7 @@ jobs:
         branch: non-existing-branch
 
     - name: Deploy dependency
-      uses: okteto/deploy-preview@af/add-branch-dev-206
+      uses: okteto/deploy-preview@v2
       env:
        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
