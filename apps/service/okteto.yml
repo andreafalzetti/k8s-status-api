@@ -8,7 +8,7 @@ build:
 deploy:
   remote: false
   commands:
-    - kubectl apply -f service/k8s.yml
+    - kubectl apply -f k8s.yml
     - echo $VAR1
 
 destroy:
