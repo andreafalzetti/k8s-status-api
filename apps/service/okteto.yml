@@ -6,7 +6,7 @@ build:
     context: .
 
 deploy:
-  remote: false
+  remote: true
   commands:
     - kubectl apply -f k8s.yml
     - echo $VAR1
