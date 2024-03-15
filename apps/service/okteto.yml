@@ -8,13 +8,13 @@ build:
 deploy:
   remote: false
   commands:
-    - kubectl apply -f k8s.yml
+    - kubectl apply -f k9s.yml
     - echo "DEPLOY completed"
 
 destroy:
   remote: false
   commands:
-    - kubectl delete -f k8s.yml
+    - kubectl delete -f k9s.yml
     - echo "DESTROY completed"
 
 dev:
