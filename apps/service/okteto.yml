@@ -9,12 +9,13 @@ deploy:
   remote: true
   commands:
     - kubectl apply -f k8s.yml
-    - echo $VAR1
+    - echo "DEPLOY completed"
 
 destroy:
-  remote: true
+  remote: false
   commands:
-    - echo "destroy!!"
+    - kubectl delete -f k8s.yml
+    - echo "DESTROY completed"
 
 dev:
   k8s-status-api:
