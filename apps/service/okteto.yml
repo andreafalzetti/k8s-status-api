@@ -6,7 +6,7 @@ build:
     context: .
 
 deploy:
-  remote: true
+  remote: false
   commands:
     - kubectl apply -f k8s.yml
     - echo "DEPLOY completed"
